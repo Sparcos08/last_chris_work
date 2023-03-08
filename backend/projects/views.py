@@ -53,10 +53,21 @@ def ProjectCreate(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def ProjectUpdate(request, pk):
-    project = Project.objects.get(id=int(pk))
-    serializer = ProjectSerializer(instance=project,data=request.data)
-    if serializer.is_valid():
-        serializer.save(project_owner=request.user)
+    print(request.data['uploaded'])
+    if 'media' in request.data['uploaded']:
+        print('mawjouda media')
+        d = {'title':request.data['title'],'description':request.data['description']}
+        project = Project.objects.get(id=int(pk))
+        serializer = ProjectSerializer(instance=project,data=d)
+        if serializer.is_valid():
+            serializer.save(project_owner=request.user)
+    else:
+        print('mch mawjouda')
+        project = Project.objects.get(id=int(pk))
+        serializer = ProjectSerializer(instance=project,data=request.data)
+        if serializer.is_valid():
+            serializer.save(project_owner=request.user)
+
     return Response(serializer.data)
 
 @api_view(['GET'])

@@ -22,6 +22,8 @@ export const EditProject = () => {
   const [update , setUpdate] = React.useState(false)
   const [open, setOpen] = React.useState(false);
  
+  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -88,9 +90,16 @@ export const EditProject = () => {
  
   }
   const handleUpdateProject = () => {
-    axios.post("http://127.0.0.1:8000/projects/project-update/"+id+"/", {title:title,description:description},
+    const formData = new FormData();
+    formData.append('uploaded',uploaded);
+
+    formData.append('title',title);
+    formData.append('description',description);
+  
+    axios.post("http://127.0.0.1:8000/projects/project-update/"+id+"/",
+     formData,
     {
-      headers: { 'Content-Type': 'application/json',
+      headers: { 'Content-Type': 'multipart/form-data',
                   "Authorization": `Bearer ${auth?.user?.access}`,
         },
         
@@ -286,7 +295,9 @@ export const EditProject = () => {
         
         }
 
-
+            <div>
+            <input type="file" onChange={(e) => setUploaded(e.target.files[0])} />
+             </div>
 
 <Button
       disabled={role==="viewer"} 

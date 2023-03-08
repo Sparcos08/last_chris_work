@@ -25,14 +25,10 @@ function Project() {
   const [description, setDescription] = useState('')
   const [delievery_service, setDelieveryService] = useState("no");
   const [data, setData] = useState(null);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('uploaded',uploaded);
-
-    formData.append('title',title);
-    formData.append('description',description);
-    formData.append('delievery_service',delievery_service);
+   
     const body = jwt_decode(auth?.user?.access).user_type === 'customer' ? { title, description, delievery_service,uploaded } : null
     console.log({ body });
     try {
