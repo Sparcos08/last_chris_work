@@ -12,8 +12,7 @@ export const EditProject = () => {
   const navigate = useNavigate();
   const auth = useAuthContext(); 
   let {id} = useParams()
-  console.log(id);
-  console.log("%µµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµ*******************************************");
+ 
   const [title, setTitle] = React.useState('')
   const [description, setDescription] = React.useState('')
   const [status, setStatus] = React.useState('')
@@ -22,14 +21,13 @@ export const EditProject = () => {
   const [memebers , setMembers] = React.useState([])
   const [update , setUpdate] = React.useState(false)
   const [open, setOpen] = React.useState(false);
-  console.log("aziiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiz")
-  console.log(uploaded)
+ 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClick = ()=>  {
     // Redirect the user to the new website URL
-    window.location.href = 'http://127.0.0.1:8000'+uploaded+'/';
+    window.location.href = "http://127.0.0.1:8000"+uploaded+"/";
   };
   const handleClose = () => {
     setOpen(false);
@@ -136,47 +134,46 @@ export const EditProject = () => {
         console.log(error);
       });
   }, []);
-  const projectInformations = () => {
+  // const projectInformations = () => {
     
-    const response = axios.get("http://127.0.0.1:8000/projects/ProjectInformations/"+id+"/", 
-      {
-        headers: { 'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${auth?.user?.access}`,
-      },
+  //   const response = axios.get("http://127.0.0.1:8000/projects/ProjectInformations/"+id+"/", 
+  //     {
+  //       headers: { 'Content-Type': 'application/json',
+  //                   "Authorization": `Bearer ${auth?.user?.access}`,
+  //     },
       
 
 
       
 
-      }
-    ).then((response) => {
-      console.log("aziiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiz")
-      console.log(response.data)
-      setTitle(response.data.title)
-      setDescription(response.data.description)
-      setStatus(response.data.status)
-      setRole(response.data.role)
-      // TODO: remove console.logs before deployment
+  //     }
+  //   ).then((response) => {
+      
+  //     setTitle(response.data.title)
+  //     setDescription(response.data.description)
+  //     setStatus(response.data.status)
+  //     setRole(response.data.role)
+  //     // TODO: remove console.logs before deployment
    
-      //navigate("/", { replace: true })
+  //     //navigate("/", { replace: true })
 
   
 
-  }).catch((err)=>{
-    if (!err) {
-      console.log('No Server Response');
-    }  else {
-      console.log(err)
-      console.log('No data' )
-    }
-  }) ;
+  // }).catch((err)=>{
+  //   if (!err) {
+  //     console.log('No Server Response');
+  //   }  else {
+  //     console.log(err)
+  //     console.log('No data' )
+  //   }
+  // }) ;
   
 
  
-  }
+  // }
 
 
-   React.useEffect( ()=>{
+   useEffect( ()=>{
 
       axios.get("http://127.0.0.1:8000/projects/project-members/list/"+id+"/", 
        {
@@ -211,7 +208,7 @@ export const EditProject = () => {
 
 
   React.useEffect(() => {
-    projectInformations()
+    
   }, [ open])
   
 
@@ -230,7 +227,7 @@ export const EditProject = () => {
               required
               fullWidth
               id="title"
-              // label="title"
+              label="title"
               name="title"
               autoComplete="title" 
               autoFocus
@@ -242,7 +239,7 @@ export const EditProject = () => {
               required
               fullWidth
               id="description"
-              // label="description"
+              label="description"
               name="description"
               autoComplete="description"
               onChange={(e) => setDescription(e.target.value)}
@@ -254,7 +251,7 @@ export const EditProject = () => {
               required
               fullWidth
               id="status"
-              // label="status"
+              label="status"
               name="status"
               autoComplete="status"
               
@@ -299,9 +296,7 @@ export const EditProject = () => {
         sx={{ mt: 3, mb: 2 }}
       >Download File</Button>
 
-      <div>
-        <button onClick={handleClick}>Click me to go to the new website</button>
-      </div>
+
 
 
       <Button

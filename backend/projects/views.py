@@ -142,7 +142,7 @@ def List_External_Projects(request):
 
 @api_view(['DELETE'])
 def Member_Delete(request, pk):
-    member = Project_Members.objects.get(id_user=pk)
+    member = Project_Members.objects.filter(id_user=pk)
     member.delete()
     return Response('mumber succesfully deleted!')
 
