@@ -28,7 +28,11 @@ function Project() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
+    const formData = new FormData();
+    formData.append('uploaded',uploaded);
+
+    formData.append('title',title);
+    formData.append('description',description);
     const body = jwt_decode(auth?.user?.access).user_type === 'customer' ? { title, description, delievery_service,uploaded } : null
     console.log({ body });
     try {

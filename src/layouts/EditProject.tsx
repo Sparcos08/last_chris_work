@@ -31,6 +31,10 @@ export const EditProject = () => {
     // Redirect the user to the new website URL
     window.location.href = "http://127.0.0.1:8000"+uploaded+"/";
   };
+  const handleReload = ()=> {
+    // window.location.reload();
+    window.location.href = "http://localhost:5173/activeProjects/edit/"+id;
+  }
   const handleClose = () => {
     setOpen(false);
     setUpdate(false);
@@ -114,8 +118,10 @@ export const EditProject = () => {
         setDescription(response.data.description)
         setStatus(response.data.status)
         setRole(response.data.role)
+        setUploaded(response.data.uploaded)
         console.log("zzzssz",response.data)
-        //  navigate(`activeProjects/edit/`, {id , title : paramTitle, description : paramDescription, status : paramStatus, role: paramRole, uploaded:paramUploaded})
+        // handleReload()
+        // navigate(`activeProjects/edit/`+id)
         
 
 
